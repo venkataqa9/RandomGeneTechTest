@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:test-suite start="1582888248339" stop="1582888261620" version="1.5.2" xmlns:ns2="urn:model.allure.qatools.yandex.ru">
+    <name>Random Date Generator</name>
+    <description type="text">
+As a tester
+I want to genarate 10 random numbers
+So that I can see random numbers are generated</description>
+    <test-cases>
+        <test-case start="1582888248394" stop="1582888261609" status="passed">
+            <name>Generate random number</name>
+            <title>Generate random number</title>
+            <description type="text"></description>
+            <steps>
+                <step start="1582888259457" stop="1582888259664" status="passed">
+                    <name>Given I navigate to generate random date</name>
+                    <title>Given I navigate to generate random date</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start="1582888259665" stop="1582888260139" status="passed">
+                    <name>And I enter count as 10 in how many dates to generate</name>
+                    <title>And I enter count as 10 in how many dates to generate</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start="1582888260139" stop="1582888260342" status="passed">
+                    <name>When I select generate random dates</name>
+                    <title>When I select generate random dates</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+                <step start="1582888260342" stop="1582888260390" status="passed">
+                    <name>Then I should see dates are generated</name>
+                    <title>Then I should see dates are generated</title>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <labels>
+                <label name="story" value="Generate random number"/>
+                <label name="feature" value="Random Date Generator"/>
+                <label name="host" value="BUK4985"/>
+                <label name="thread" value="21268@BUK4985.main(1)"/>
+                <label name="framework" value="CucumberJVM"/>
+            </labels>
+        </test-case>
+    </test-cases>
+    <labels>
+        <label name="feature" value="Random Date Generator"/>
+        <label name="language" value="JAVA"/>
+    </labels>
+</ns2:test-suite>

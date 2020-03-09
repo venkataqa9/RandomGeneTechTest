@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com</groupId>
+    <artifactId>codeGen</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>codeGen</name>
+    <url>http://maven.apache.org</url>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <cucumber.version>1.2.2</cucumber.version>
+        <seleniumJava.version>2.53.0</seleniumJava.version>
+        <seleniumServer.version>2.53.0</seleniumServer.version>
+        <junit.version>4.12</junit.version>
+        <appium.version>3.1.0</appium.version>
+        <log4j.version>1.2.16</log4j.version>
+        <assertJ.version>1.7.0</assertJ.version>
+        <BrowserInstances>19</BrowserInstances>
+        <aspectj.version>1.8.4</aspectj.version>
+        <version.allure>1.5.2</version.allure>
+        <cucumber.version>1.2.4</cucumber.version>
+    </properties>
+
+    <dependencies>
+        <!-- Downloads latest chrome browser from "https://sites.google.com/a/chromium.org/chromedriver/downloads" -->
+        <!-- Below dependency for PHANTOMJS test's no need to download phantomjs-->
+        <!-- https://github.com/bonigarcia/webdrivermanager/commit/9412d73e65abff0f9800e55cda05baaeaa554542-->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+        <!-- To slient slf4j Logs to console or file -->
+        <dependency>
+            <groupId>com.dadrox</groupId>
+            <artifactId>quiet-slf4j</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <!-- Dependency injections -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <!-- Selenium dependency -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${seleniumJava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${seleniumServer.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+        <!-- Cucumber-JVM dependency -->
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertJ.version}</version>
+        </dependency>
+        <!-- Allure Reports -->
+        <dependency>
+            <groupId>com.github.kirlionik</groupId>
+            <artifactId>allure-cucumber-plugin</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-java-aspects</artifactId>
+            <version>${version.allure}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <artifactId>allure-commons</artifactId>
+            <version>${version.allure}</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.4.1</version>
+                    <executions>
+                        <execution>
+                            <id>auto-clean</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+                <!-- RE-USEFORKS ->Indicates if forked VMs can be reused. If set to "false",
+                    a new VM is forked for each test class to be executed. If set to "true",
+                    up to forkCount VMs will be forked and then reused to execute all tests -->
+
+                <!-- FORK-COUNT ->Number of instance to run test parallel -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19.1</version>
+                    <configuration>
+                        <forkCount>${BrowserInstances}</forkCount>
+                        <argLine>-Duser.language=en</argLine>
+                        <argLine>-Xmx1024m</argLine>
+                        <argLine>-XX:MaxPermSize=256m</argLine>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                        <useFile>false</useFile>
+                        <includes>
+                            <include>**/*Test.class</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <configuration>
+                        <testFailureIgnore>true</testFailureIgnore>
+                        <argLine>
+                            -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                        </argLine>
+                        <properties>
+                            <property>
+                                <name>listener</name>
+                                <value>ru.yandex.qatools.allure.junit.AllureRunListener</value>
+                            </property>
+                        </properties>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectj.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
