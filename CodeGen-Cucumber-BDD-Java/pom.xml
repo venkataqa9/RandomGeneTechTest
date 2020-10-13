@@ -17,7 +17,7 @@
         <cucumber.version>1.2.2</cucumber.version>
         <seleniumJava.version>2.53.0</seleniumJava.version>
         <seleniumServer.version>2.53.0</seleniumServer.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <appium.version>3.1.0</appium.version>
         <log4j.version>1.2.16</log4j.version>
         <assertJ.version>1.7.0</assertJ.version>
